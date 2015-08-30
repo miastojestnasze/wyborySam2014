@@ -12,8 +12,12 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.dirname(__file__)
+sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -30,14 +34,20 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = (
+PREREQ_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-)
+]
+
+PROJECT_APPS = [
+    'stats'
+]
+
+INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -55,7 +65,7 @@ ROOT_URLCONF = 'wyborySamSite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [PROJECT_PATH + '/stats/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +78,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'wyborySamSite.wsgi.application'
 
 
@@ -75,9 +86,17 @@ WSGI_APPLICATION = 'wyborySamSite.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'wyborySam2014',
+        'USER': 'admin',
+        'PASSWORD': 'qazwsx',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
