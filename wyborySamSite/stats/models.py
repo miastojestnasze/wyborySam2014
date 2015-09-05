@@ -4,7 +4,7 @@ from django.db import models
 class Address(models.Model):
     teryt = models.IntegerField(default=0)
     number_of_district = models.IntegerField(default=0)
-    address = models.CharField(max_length=500, defualt=None)
+    address = models.CharField(max_length=500, default=None)
     district = models.CharField(max_length=50, default=None)
     commune = models.CharField(max_length=200, default=None)
     commune_type = models.CharField(max_length=200, default=None)
@@ -50,3 +50,20 @@ class Votes_data(Address):
 class Election(Votes_data):
     election_type = models.CharField(max_length=10, default=None)
     votes = models.CharField(max_length=10000, default=None)
+
+
+class Candidate(models.Model):
+    surname = models.CharField(max_length=255, default=None)
+    names = models.CharField(max_length=255, default=None)
+    age = models.IntegerField(default=0)
+    sex = models.CharField(max_length=3, default=None)
+    place_of_living = models.CharField(max_length=511, default=None)
+    voivodeship = models.CharField(max_length=127, default=None)
+    nationality = models.CharField(max_length=127, default=None)
+    votes = models.IntegerField(default=0)
+    election_committee = models.CharField(max_length=63, default=None)  # coded, i.e 'kw1', 'kwp2'
+    number_of_list = models.IntegerField(default=0)
+    pos = models.IntegerField(default=0)
+    number_of_district = models.IntegerField(default=0)
+    grade = models.CharField(max_length=10, default=None)
+    teryt = models.IntegerField(default=0)
