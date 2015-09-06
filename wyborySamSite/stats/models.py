@@ -11,6 +11,7 @@ class Address(models.Model):
     county = models.CharField(max_length=200, default=None)
     voivodeship = models.CharField(max_length=200, default=None)
     number_of_electoral_circuit = models.IntegerField(default=0)
+    number_electoral_circuits = models.IntegerField(default=0)
 
     class Meta:
         abstract = True
