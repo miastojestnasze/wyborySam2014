@@ -39,7 +39,8 @@ dictionary_base = {
     "number_of_electoral_circuit": "Nr obw.",
     "number_electoral_circuits": "Liczba obwodów",
     "electoral_packages": "Pakiety wyborcze",
-    "district": "Dzielnica"
+    "district": "Dzielnica",
+    "territory": "Teren"
 }
 
 dictionary_parties = {
@@ -48,7 +49,7 @@ dictionary_parties = {
     "kww3": "Komitet Wyborczy Wyborców Gwiaździsta",
     "kww4": "Komitet Wyborczy Wyborców Włochy- Miasto Ogród",
     "kww5": "Komitet Wyborczy Stowarzyszenia Zwykłego Nasz Targówek",
-    "kww6": "Komitet Wyborczy Rembertów Bezpośbrednio",
+    "kww6": "Komitet Wyborczy Rembertów Bezpośrednio",
     "kww7": "Komitet Wyborczy Wyborców FORUM DLA REMBERTOWA",
     "kww8": "Komitet Wyborczy Wyborców Ochocka Wspólnota Samorządowa",
     "kww9": "Komitet Wyborczy Stowarzyszenia Mieszkańców Miasteczka Wilanów",
@@ -59,7 +60,7 @@ dictionary_parties = {
     "kww14": "Koalicyjny Komitet Wyborczy SLD Lewica Razem",
     "kww15": "Komitet Wyborczy Wyborców \"Mieszkańcy Bródna - Targówka- Zacisza\"",
     "kww16": "Komitet Wyborczy Wyborców Andrzeja Rozenka",
-    "kww17": "Komitet Wyborczy Wyborcóww Patriotyzm i Kultura",
+    "kww17": "Komitet Wyborczy Wyborców Patriotyzm i Kultura",
     "kww18": "Komitet Wyborczy Stowarzyszenie Sąsiedzkie Stara Miłosna \"Sąsiedzi dla Wesołej\"",
     "kww19": "Komitet Wyborczy Wyborców Inicjatywa Mieszkańców Mokotowa",
     "kww20": "Komitet Wyborczy Wyborców Inicjatywa Mieszkańców Ursynowa ",
@@ -75,7 +76,7 @@ dictionary_parties = {
     "kww30": "Komitet Wyborczy Wyborców Miasto jest Nasze - Mieszkańcy Bielan",
     "kww31": "Komitet Wyborczy Stowarzyszenia Nasz Ursynów",
     "kww32": "Komitet Wyborczy Wyborców Ruch Sprawiedliwości Społecznej - Piotr Ikonowicz",
-    "kww33": "Komitet Wyborczy Wyborców Miasto Jest Nasze #\u017boliborz",
+    "kww33": "Komitet Wyborczy Wyborców Miasto Jest Nasze #Żoliborz",
     "kww34": "Komitet Wyborczy Warszawa Społeczna",
     "kww35": "Komitet Wyborczy Bemowska Wspólnota Samorządowa",
     "kww36": "Komitet Wyborczy Wyborców Jarosław Dąbrowski burmistrzem DLA BEMOWA",
@@ -94,9 +95,9 @@ dictionary_parties = {
 dictionary_candidates_president = {
     "prez": "WRZESIŃSKI Zbigniew Antoni",
     "prez1": "SASIN Jacek Robert",
-    "prez2": "WIERZBICKI Sebastian", 
-    "prez3": "NOSAL-IKONOWICZ Agata Alina", 
-    "prez4": "GRONKIEWICZ-WALTZ Hanna Beata", 
+    "prez2": "WIERZBICKI Sebastian",
+    "prez3": "NOSAL-IKONOWICZ Agata Alina",
+    "prez4": "GRONKIEWICZ-WALTZ Hanna Beata",
     "prez5": "ROZENEK Andrzej Tadeusz",
     "prez6": "DZIERŻAWSKI Mariusz Andrzej",
     "prez7": "GORAYSKI Andrzej Józef",
@@ -112,14 +113,16 @@ dictionary_candidates = {
     "names": "Imiona",
     "age": "Wiek",
     "grade": "Szczebel",
-    "number_of_district": "Nr\nokr.",
-    "number_of_list": "Nr\nlisty",
+    "number_of_district": "Nr okr.",
+    "number_of_list": "Nr listy",
     "place_of_living": "Miejsce zam.",
-    "voivodeship": "Nazwa",
+    "voivodeship": "Województwo",
     "sex": "Płeć",
     "votes": "Głosy",
     "election_committee": "Komitet",
-    "pos": "Poz."
+    "pos": "Poz.",
+    "mandate": "Mandat",
+    "supported_by": "Poparcie"
 }
 
 dictionary_voivodeship = {
@@ -129,7 +132,7 @@ dictionary_voivodeship = {
     "commune_type": "Typ gminy"
 }
 
-#remove '\n' from keys!!!!!
+
 dictionary_voivodeship_council = {
     "kw": "Komitet Wyborczy Wyborców Ruch Narodowy",
     "kw1": "Komitet Wyborczy Demokracja Bezpośrednia",
@@ -165,6 +168,7 @@ dictionary_city_council = {
     "kwc13": "Komitet Wyborczy Związku Sybiraków",
     "kwc14": "Komitet Wyborczy Wyborców Krzysztofa Bieleckiego",
     "kwc15": "Komitet Wyborczy Wyborców Współpraca i Partnerstwo",
+    "kwc16": "Komitet Wyborczy Wyborców Centrum Społecznej Demokracji "
 }
 
 decoder = merge_dicts(dictionary_base, dictionary_parties,

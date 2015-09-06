@@ -4,7 +4,17 @@
   <title>Import Jsons to database</title>
 </head>
 <body>
-<p>Upload</p>
-<button>upload</button>
+  {% if forms %}
+  <H1>Upload json</H1>
+  <form action="/data/import/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{forms.as_p}}
+    <input type="submit" value="Submit"/>
+  </form>
+  {% endif %}
+
+  {% if msg %}
+  <h1>{{msg}}</h1>
+  {% endif %}
 </body>
 </html>
