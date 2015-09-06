@@ -32,6 +32,10 @@ def create_models(request):
             new_model['votes'] = json.dumps(new_model['votes'])
         except:
             pass
+        try:
+            new_model['notes'] = json.dumps(new_model['notes'])
+        except:
+            pass
         if type != 'candidate':
             model = Election(new_model)
         elif type != 'candidate':
