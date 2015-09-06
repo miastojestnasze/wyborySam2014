@@ -18,7 +18,7 @@ class Address(models.Model):
 
 
 class Votes_data(Address):
-    type = models.CharField(max_length=10, default=None)
+    type = models.CharField(max_length=63, default=None)
     number_of_voters = models.IntegerField(default=0)
     number_of_proxies = models.IntegerField(default=0)
     cards_given = models.IntegerField(default=0)
@@ -54,6 +54,7 @@ class Election(Votes_data):
 
 
 class Candidate(models.Model):
+    type = models.CharField(max_length=63, default=None)
     surname = models.CharField(max_length=255, default=None)
     names = models.CharField(max_length=255, default=None)
     age = models.IntegerField(default=0)
