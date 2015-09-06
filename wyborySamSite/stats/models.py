@@ -50,7 +50,8 @@ class Votes_data(Address):
 
 class Election(Votes_data):
     election_type = models.CharField(max_length=10, default=None)
-    votes = models.CharField(max_length=10000, default=None)
+    votes = models.TextField(default='[]')
+    notes = models.TextField(default='[]')
 
 
 class Candidate(models.Model):
