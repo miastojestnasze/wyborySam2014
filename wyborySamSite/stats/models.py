@@ -69,4 +69,6 @@ class Candidate(models.Model):
     pos = models.IntegerField(default=0)
     number_of_district = models.IntegerField(default=0)
     grade = models.CharField(max_length=10, default=None)
+    mandate = models.CharField(max_length=2, default='n')
+    supported_by = models.TextField(default=None)
     teryt = models.IntegerField(default=0)
