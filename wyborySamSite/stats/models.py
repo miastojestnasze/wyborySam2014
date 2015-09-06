@@ -3,6 +3,7 @@ from django.db import models
 
 class Address(models.Model):
     teryt = models.IntegerField(default=0)
+    territory = models.CharField(max_length=7)
     number_of_district = models.IntegerField(default=0)
     address = models.CharField(max_length=500, default=None)
     district = models.CharField(max_length=50, default=None)
