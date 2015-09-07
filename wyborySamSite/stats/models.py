@@ -51,8 +51,13 @@ class Votes_data(Address):
 
 class Election(Votes_data):
     election_type = models.CharField(max_length=10, default=None)
-    votes = models.TextField(default='[]')
     notes = models.TextField(default='[]')
+
+
+class Vote(models.Model):
+    election = models.ForeignKey(Election)
+    political_party = models.CharField(max_length=2047, default=None)
+    amount = models.IntegerField(default=0)
 
 
 class Candidate(models.Model):

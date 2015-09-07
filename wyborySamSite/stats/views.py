@@ -2,7 +2,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from forms import UploadFileForm
-from models import Election, Candidate
+from models import Election, Candidate, Vote
 from properties_decoder import coder, decoder
 import json
 
@@ -13,6 +13,7 @@ def create_models(request):
 
     for obj in json_file:
         new_model = {'type': type}
+        votes = []
         for k, v in obj.iteritems():
             if 'Pkt' in k:
                 try:
@@ -22,25 +23,22 @@ def create_models(request):
                 continue
             k_coded = coder[k.encode('utf-8')]
             if 'kw' in k_coded or 'prez' in k_coded:
-                try:
-                    new_model['votes'].append({k_coded: v})
-                except:
-                    new_model['votes'] = [{k_coded: v}]
+                vote = Vote({'political_party': k, 'amount': v})
+                vote.save()
+                votes.append(vote)
             else:
                 new_model[coder[k.encode('utf-8')]] = v
-        try:
-            new_model['votes'] = json.dumps(new_model['votes'])
-        except:
-            pass
         try:
             new_model['notes'] = json.dumps(new_model['notes'])
         except:
             pass
         if type != 'candidate':
-            model = Election(new_model)
+            election_model = Election(new_model)
         elif type != 'candidate':
-            model = Candidate(new_model)
-        model.save()
+            election_model = Candidate(new_model)
+        election_model.save()
+        for v in votes:
+            v.election = election_model
 
 
 @login_required(login_url='/admin/login/')
