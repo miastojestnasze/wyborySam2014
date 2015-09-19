@@ -12,7 +12,7 @@ def create_models(request):
     type = request.POST['options']
 
     for obj in json_file:
-        new_model = {'type': type}
+        new_model = {'election_type': type}
         votes = []
         for k, v in obj.iteritems():
             if 'Pkt' in k:
@@ -23,7 +23,7 @@ def create_models(request):
                 continue
             k_coded = coder[k.encode('utf-8')]
             if 'kw' in k_coded or 'prez' in k_coded:
-                vote = Vote({'political_party': k, 'amount': v})
+                vote = Vote(political_party=k, amount=v)
                 vote.save()
                 votes.append(vote)
             else:
@@ -33,10 +33,13 @@ def create_models(request):
         except:
             pass
         if type != 'candidate':
-            election_model = Election(new_model)
-        elif type != 'candidate':
-            election_model = Candidate(new_model)
-        election_model.save()
+            election_model = Election(**new_model)
+            election_model.save()
+        elif type == 'candidate':
+            election_model = Candidate(**new_model)
+            election_model.save()
+            return
+
         for v in votes:
             v.election = election_model
 
