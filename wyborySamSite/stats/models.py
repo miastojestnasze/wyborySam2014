@@ -5,21 +5,21 @@ class Address(models.Model):
     teryt = models.IntegerField(default=0)
     territory = models.CharField(max_length=7)
     number_of_district = models.IntegerField(default=0)
-    address = models.CharField(max_length=500, default=None)
-    district = models.CharField(max_length=50, default=None)
-    commune = models.CharField(max_length=200, default=None)
-    commune_type = models.CharField(max_length=200, default=None)
-    county = models.CharField(max_length=200, default=None)
-    voivodeship = models.CharField(max_length=200, default=None)
+    address = models.CharField(max_length=500, default=None, null=True, blank=True)
+    district = models.CharField(max_length=50, default=None, null=True, blank=True)
+    commune = models.CharField(max_length=200, default=None, null=True, blank=True)
+    commune_type = models.CharField(max_length=200, default=None, null=True, blank=True)
+    county = models.CharField(max_length=200, default=None, null=True, blank=True)
+    voivodeship = models.CharField(max_length=200, default=None, null=True, blank=True)
     number_of_electoral_circuit = models.IntegerField(default=0)
-    number_electoral_circuits = models.IntegerField(default=0)
+    number_electoral_circuits = models.IntegerField(default=0, null=True, blank=True)
 
     class Meta:
         abstract = True
 
 
 class Votes_data(Address):
-    type = models.CharField(max_length=63, default=None)
+    type = models.CharField(max_length=63, default=None, null=True, blank=True)
     number_of_voters = models.IntegerField(default=0)
     number_of_proxies = models.IntegerField(default=0)
     cards_given = models.IntegerField(default=0)
@@ -50,18 +50,18 @@ class Votes_data(Address):
 
 
 class Election(Votes_data):
-    election_type = models.CharField(max_length=10, default=None)
+    election_type = models.CharField(max_length=511, default=None)
     notes = models.TextField(default='[]')
 
 
 class Vote(models.Model):
-    election = models.ForeignKey(Election)
+    election = models.ForeignKey(Election, null=True, blank=True)
     political_party = models.CharField(max_length=2047, default=None)
     amount = models.IntegerField(default=0)
 
 
 class Candidate(models.Model):
-    type = models.CharField(max_length=63, default=None)
+    election_type = models.CharField(max_length=511, default=None)
     surname = models.CharField(max_length=255, default=None)
     names = models.CharField(max_length=255, default=None)
     age = models.IntegerField(default=0)
@@ -76,5 +76,5 @@ class Candidate(models.Model):
     number_of_district = models.IntegerField(default=0)
     grade = models.CharField(max_length=10, default=None)
     mandate = models.CharField(max_length=2, default='n')
-    supported_by = models.TextField(default=None)
+    supported_by = models.TextField(default=None, null=True, blank=True)
     teryt = models.IntegerField(default=0)
