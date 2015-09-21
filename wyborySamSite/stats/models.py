@@ -70,7 +70,7 @@ class Candidate(models.Model):
     voivodeship = models.CharField(max_length=127, default=None)
     nationality = models.CharField(max_length=127, default=None)
     votes = models.IntegerField(default=0)
-    election_committee = models.CharField(max_length=63, default=None)  # coded, i.e 'kw1', 'kwp2'
+    election_committee = models.CharField(max_length=2047, default=None)  # coded, i.e 'kw1', 'kwp2'
     number_of_list = models.IntegerField(default=0)
     pos = models.IntegerField(default=0)
     number_of_district = models.IntegerField(default=0)

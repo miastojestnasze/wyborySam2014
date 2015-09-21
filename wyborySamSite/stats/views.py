@@ -38,7 +38,7 @@ def create_models(request):
         elif type == 'candidate':
             election_model = Candidate(**new_model)
             election_model.save()
-            return
+            continue
 
         for v in votes:
             v.election = election_model
