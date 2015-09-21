@@ -42,6 +42,7 @@ def create_models(request):
 
         for v in votes:
             v.election = election_model
+            v.save()
 
 
 @login_required(login_url='/admin/login/')
