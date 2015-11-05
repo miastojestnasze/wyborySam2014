@@ -4,7 +4,52 @@ from django.shortcuts import render
 from forms import UploadFileForm
 from models import Election, Candidate, Vote
 from properties_decoder import coder, decoder
+from django.db.models import Avg, Count, F, Max, Min, Sum, Q, Prefetch
 import json
+
+
+# Vote.objects.filter(election__election_type='district').distinct('political_party') and list all political parties
+
+# Vote.objects.filter(
+#     election__election_type='district', 
+#     political_party='Komitet Wyborczy Wyborców Miasto Jest Nasze-Mieszkańców Śródmieścia')
+# .aggregate(Sum('amount'))
+# >{'amount__sum': 5581}
+
+
+#//Sample query with sum of votes, statictics
+# Election.objects.filter(election_type='district')
+#.aggregate(Sum('number_of_voters'), Sum('votes_valid'), Sum('cards_given'), Sum('cards_taken'))
+
+def get_geography(request):
+    pass
+
+
+def get_areas_tree(request):
+    pass
+
+
+def get_district_stats(request, election_type, district_name):
+    print election_type, district_name
+    pass
+
+
+def get_circle_stats(request, election_type, district_name, circle):
+    print election_type, district_name, circle
+    pass
+
+
+def get_circuit_stats(request, election_type, district_name, circle, circuit):
+    print election_type, district_name, circle, circuit
+    pass
+
+
+def get_political_party_candidates(request, election_type, district_name, party):
+    pass
+
+
+def get_circle_candidates(request, election_type, district_name, circle):
+    pass
 
 
 def create_models(request):
