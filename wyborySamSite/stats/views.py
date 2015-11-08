@@ -1,10 +1,11 @@
 # coding=UTF-8
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.http import JsonResponse
 from forms import UploadFileForm
 from models import Election, Candidate, Vote
 from properties_decoder import coder, decoder
-from django.db.models import Avg, Count, F, Max, Min, Sum, Q, Prefetch
+from tree import get_election_tree
 import json
 
 
@@ -26,8 +27,12 @@ def get_geography(request):
 
 
 def get_areas_tree(request):
-    pass
+    tree = {}
+    for el in Election.objects.filter().distinct('election_type'):
+        if not el.election_type in ['president_first_turn_districts', 'president_second_turn_districts', 'voivodeship']:
+            tree[el.election_type] = get_election_tree(el.election_type)
 
+    return JsonResponse(tree)
 
 def get_district_stats(request, election_type, district_name):
     print election_type, district_name
