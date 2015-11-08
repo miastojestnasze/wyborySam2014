@@ -1,6 +1,7 @@
 # coding=UTF-8
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.db.models import Avg, Count, F, Max, Min, Sum, Q, Prefetch
 from django.http import JsonResponse
 from forms import UploadFileForm
 from models import Election, Candidate, Vote
@@ -34,26 +35,31 @@ def get_areas_tree(request):
 
     return JsonResponse(tree)
 
-def get_district_stats(request, election_type, district_name):
-    print election_type, district_name
-    pass
+
+def get_stats(request, **kwargs):
+    votes_kwargs = {}
+    
+    for k, v in kwargs.iteritems():
+        print k, v
+        if k != 'political_party':
+            votes_kwargs['election__' + k] = float(v) if 'number' in k else v
+
+    district_data = {'geography':{}, 'votes':[]}
+
+    for v in Vote.objects.filter(**votes_kwargs).distinct('political_party'):
+        votes_kwargs['political_party'] = v.political_party
+        obj = {
+            'political_party': v.political_party,
+            'amount': Vote.objects.filter(**votes_kwargs).aggregate(Sum('amount'))['amount__sum']
+        }
+        votes_kwargs.pop('political_party')
+        obj['percentage'] = round(float(obj['amount'])/ Vote.objects.filter(**votes_kwargs).aggregate(Sum('amount'))['amount__sum']*100, 2)
+        district_data['votes'].append(obj)
+
+    return JsonResponse(district_data)
 
 
-def get_circle_stats(request, election_type, district_name, circle):
-    print election_type, district_name, circle
-    pass
-
-
-def get_circuit_stats(request, election_type, district_name, circle, circuit):
-    print election_type, district_name, circle, circuit
-    pass
-
-
-def get_political_party_candidates(request, election_type, district_name, party):
-    pass
-
-
-def get_circle_candidates(request, election_type, district_name, circle):
+def get_candidates(request, **kwargs):
     pass
 
 
