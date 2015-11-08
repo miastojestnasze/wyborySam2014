@@ -19,8 +19,10 @@ urlpatterns = [
     url(r'^api/stats/(?P<election_type>.+)/district-(?P<district>[\w|\W]+)/$',
         get_stats, name='district-stats'),
     url(r'^api/stats/(?P<election_type>.+)/$', get_stats, name='stats'),
-    url(r'^api/candidates/(?P<election_type>[a-z]+)/(?P<district>[\w|\W]+)/(?P<party>[\w|\W]+)/$', 
+    url(r'^api/candidates/(?P<election_type>[a-z]+)/district-(?P<district>[\w|\W]+)/pparty-(?P<election_committee>[\w|\W]+)/$', 
         get_candidates, name='candidates'),
-    url(r'^api/candidates/(?P<election_type>[a-z]+)/(?P<district>[\w|\W]+)/(?P<circle>[1-9]+)/$', 
+    url(r'^api/candidates/(?P<election_type>[a-z]+)/district-(?P<district>[\w|\W]+)/circle-(?P<number_of_district>[1-9]+)/$', 
+        get_candidates, name='index'),
+    url(r'^api/candidates/(?P<election_type>[a-z]+)/district-(?P<district>[\w|\W]+)/circle-(?P<number_of_district>[1-9]+)/circuit-(?P<number_of_electoral_circuit>[1-9]+)/$', 
         get_candidates, name='index'),
 ]
