@@ -7,6 +7,7 @@ from forms import UploadFileForm
 from models import Election, Candidate, Vote
 from properties_decoder import coder, decoder
 from tree import get_election_tree
+from geography import create_geo_data
 import json
 
 
@@ -43,7 +44,7 @@ def get_stats(request, **kwargs):
         if k != 'political_party':
             votes_kwargs['election__' + k] = float(v) if 'number' in k else v
 
-    district_data = {'geography':{}, 'votes':[]}
+    district_data = {'geography': create_geo_data(**kwargs), 'votes': []}
 
     for v in Vote.objects.filter(**votes_kwargs).distinct('political_party'):
         votes_kwargs['political_party'] = v.political_party
