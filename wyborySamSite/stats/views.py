@@ -31,7 +31,7 @@ def get_geography(request):
 def get_areas_tree(request):
     tree = {}
     for el in Election.objects.filter().distinct('election_type'):
-        if not el.election_type in ['president_first_turn_districts', 'president_second_turn_districts', 'voivodeship']:
+        if not el.election_type in ['president_first_turn_districts', 'president_second_turn_districts']:
             tree[el.election_type] = get_election_tree(el.election_type)
 
     return JsonResponse(tree)
@@ -77,13 +77,18 @@ def create_models(request):
                 except:
                     new_model['notes'] = [{k: v}]
                 continue
+            
             k_coded = coder[k.encode('utf-8')]
+
             if 'kw' in k_coded or 'prez' in k_coded:
                 vote = Vote(political_party=k, amount=v)
                 vote.save()
                 votes.append(vote)
             else:
-                new_model[coder[k.encode('utf-8')]] = v
+                if 'Gmina' == k:
+                    new_model['district'] = v
+                else:
+                    new_model[coder[k.encode('utf-8')]] = v
         try:
             new_model['notes'] = json.dumps(new_model['notes'])
         except:
