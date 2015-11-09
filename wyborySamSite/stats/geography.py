@@ -3,7 +3,7 @@ from django.db.models import Sum
 
 
 def create_geo_data(**kwargs):
-    #Does I have to sum Sum('number_of_proxies') and Sum('number_of_voters')?
+    #Do I have to sum Sum('number_of_proxies') and Sum('number_of_voters')?
     # 'cards_valid' -> glosow oddanych
     data = Election.objects.filter(**kwargs).aggregate(Sum('number_of_voters'), Sum('votes_valid'), Sum('cards_given'), Sum('cards_valid'), Sum('votes_invalid'))
     for k, v in data.iteritems():
