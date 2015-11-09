@@ -176,8 +176,8 @@ coder_election_types = {
     'candidate': 'Kandydaci',
     'city_council': 'Wybory do Rady Miasta',
     'voivodeship': 'Wybory do Sejmiku',
-    'president_first_turn': 'Wybory prezydenta miasta (I tura)',
-    'president_second_turn': 'Wybory prezydenta miasta (II tura)'
+    'president_first_turn': 'Prezydent miasta (I tura)',
+    'president_second_turn': 'Prezydent miasta (II tura)'
 }
 
 decoder = merge_dicts(dictionary_base, dictionary_parties,
