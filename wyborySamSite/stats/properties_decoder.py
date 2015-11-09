@@ -171,6 +171,15 @@ dictionary_city_council = {
     "kwc16": "Komitet Wyborczy Wyborców Centrum Społecznej Demokracji "
 }
 
+coder_election_types = {
+    'district': 'Wybory do Rady Dzielnicy',
+    'candidate': 'Kandydaci',
+    'city_council': 'Wybory do Rady Miasta',
+    'voivodeship': 'Wybory do Sejmiku',
+    'president_first_turn': 'Wybory prezydenta miasta (I tura)',
+    'president_second_turn': 'Wybory prezydenta miasta (II tura)'
+}
+
 decoder = merge_dicts(dictionary_base, dictionary_parties,
                       dictionary_candidates_president, dictionary_candidates,
                       dictionary_voivodeship, dictionary_voivodeship_council,

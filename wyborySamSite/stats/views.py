@@ -5,7 +5,7 @@ from django.db.models import Avg, Count, F, Max, Min, Sum, Q, Prefetch
 from django.http import JsonResponse
 from forms import UploadFileForm
 from models import Election, Candidate, Vote
-from properties_decoder import coder, decoder
+from properties_decoder import coder, decoder, coder_election_types
 from tree import get_election_tree
 from geography import create_geo_data
 import json
@@ -29,12 +29,17 @@ def get_geography(request):
 
 
 def get_areas_tree(request):
-    tree = {}
+    tree = []
     for el in Election.objects.filter().distinct('election_type'):
         if not el.election_type in ['president_first_turn_districts', 'president_second_turn_districts']:
-            tree[el.election_type] = get_election_tree(el.election_type)
+            election = {
+                'name': coder_election_types[el.election_type],
+                'children': get_election_tree(el.election_type),
+                'url': el.election_type + '/'
+            }
+            tree.append(election)
 
-    return JsonResponse(tree)
+    return JsonResponse(tree, safe=False)
 
 
 def get_stats(request, **kwargs):
