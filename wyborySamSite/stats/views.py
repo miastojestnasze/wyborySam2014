@@ -45,7 +45,6 @@ def get_areas_tree(request):
 def get_stats(request, **kwargs):
     votes_kwargs = {}
     for k, v in kwargs.iteritems():
-        print k, v
         if k != 'political_party':
             votes_kwargs['election__' + k] = float(v) if 'number' in k else v
 
