@@ -28,6 +28,7 @@ def get_geography(request):
     pass
 
 
+# TODO: move body to tree.py and create new function
 def get_areas_tree(request):
     tree = []
     for el in Election.objects.filter().distinct('election_type'):
