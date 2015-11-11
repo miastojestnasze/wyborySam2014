@@ -1,11 +1,12 @@
 # coding=UTF-8
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.db.models import Avg, Count, F, Max, Min, Sum, Q, Prefetch
+from django.db.models import Sum
+from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from forms import UploadFileForm
 from models import Election, Candidate, Vote
-from properties_decoder import coder, decoder, coder_election_types
+from properties_decoder import coder, coder_election_types
 from tree import get_election_tree
 from geography import create_geo_data
 import json
@@ -46,6 +47,8 @@ def get_areas_tree(request):
 
 def get_stats(request, **kwargs):
     votes_kwargs = {}
+    
+
     for k, v in kwargs.iteritems():
         if k != 'political_party':
             votes_kwargs['election__' + k] = float(v) if 'number' in k else v
@@ -62,10 +65,41 @@ def get_stats(request, **kwargs):
         obj['percentage'] = round(float(obj['amount'])/ Vote.objects.filter(**votes_kwargs).aggregate(Sum('amount'))['amount__sum']*100, 2)
         district_data['votes'].append(obj)
 
+    if kwargs['election_type'] in ['district', 'city_council', 'voivodeship']:
+        district_data['candidates'] = get_candidates(**kwargs)
+
     return JsonResponse(district_data)
 
 
-def get_candidates(request, **kwargs):
+def get_candidates(**kwargs):
+    if kwargs['election_type'] == 'district':
+        kwargs['grade'] = 'DZ'
+    elif kwargs['election_type'] == 'city_council':
+        kwargs['grade'] = 'GM'
+    elif kwargs['election_type'] == 'voivodeship':
+        kwargs['grade'] = 'WO'
+    try:
+        kwargs['district']
+        kwargs['voivodeship'] = kwargs.pop('district')
+        if kwargs['election_type'] == 'voivodeship':
+            kwargs.pop('voivodeship')
+    except:
+        pass
+    try:
+        kwargs.pop('number_of_electoral_circuit')
+    except:
+        pass
+    kwargs.pop('election_type')
+    candidates = []
+
+    for c in Candidate.objects.filter(**kwargs):
+        canditate = model_to_dict(c)
+        canditate['fullName'] = canditate['names'].split(" ")[0] + ' ' + canditate['surname']
+        candidates.append(canditate)
+    return candidates
+
+
+def get_candidates_view(request, **kwargs):
     pass
 
 
