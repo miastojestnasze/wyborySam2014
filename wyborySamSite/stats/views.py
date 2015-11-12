@@ -37,7 +37,7 @@ def get_areas_tree(request):
             election = {
                 'name': coder_election_types[el.election_type],
                 'children': get_election_tree(el.election_type),
-                'url': el.election_type + '/',
+                'url': 'stats/' + el.election_type + '/',
                 'type': el.election_type
             }
             tree.append(election)

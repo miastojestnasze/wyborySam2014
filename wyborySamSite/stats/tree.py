@@ -20,7 +20,7 @@ def create_district(tree, circuit):
         district = {
             'name': circuit.district,
             'type': circuit.district,
-            'url': circuit.election_type + '/district-' + circuit.district + '/', 
+            'url': 'stats/' + circuit.election_type + '/district-' + circuit.district + '/', 
             'children': []
         }
         tree.append(district)
@@ -31,7 +31,7 @@ def create_district(tree, circuit):
 
 def create_circle(tree, circuit, is_first_child=False):
     children = tree if True == is_first_child else tree['children']
-    url = circuit.election_type + '/' if True == is_first_child else tree['url']
+    url = 'stats/' + circuit.election_type + '/' if True == is_first_child else tree['url']
     idx_circle = find_idx_dict(children, str(circuit.number_of_district), 'type')
     if idx_circle == -1:
         new_circle = {
@@ -48,7 +48,7 @@ def create_circle(tree, circuit, is_first_child=False):
 
 def create_circuit(tree, circuit, is_first_child=False):
     children = tree if True == is_first_child else tree['children']
-    url = circuit.election_type + '/' if True == is_first_child else tree['url']
+    url = 'stats/' + circuit.election_type + '/' if True == is_first_child else tree['url']
     new_circuit = {
         'name': 'Obwód nr ' + str(circuit.number_of_electoral_circuit),
         'type': str(circuit.number_of_electoral_circuit),
