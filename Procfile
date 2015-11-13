@@ -1,1 +1,1 @@
-web: gunicorn wyborySamSite.wsgi  --log-file -
+web: gunicorn wyborySamSite.wsgi  --log-file - --timeout 360
