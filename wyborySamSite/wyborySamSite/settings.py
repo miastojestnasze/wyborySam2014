@@ -125,7 +125,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
+PROJECT_DIR = os.path.dirname(__file__)
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:8000'
