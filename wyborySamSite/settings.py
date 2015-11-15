@@ -129,5 +129,5 @@ PROJECT_DIR = os.path.dirname(__file__)
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8000'
+    'http://wyreczamypkw.miastojestnasze.org/'
 )
