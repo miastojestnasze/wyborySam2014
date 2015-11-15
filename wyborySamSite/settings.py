@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 SECRET_KEY = 'im)f6(obz(yu7gs5gjx9$_6kgks)yw)9cxl(y#5mj#fqbha--a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
