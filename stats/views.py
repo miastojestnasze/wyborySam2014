@@ -11,7 +11,7 @@ from tree import get_election_tree
 from geography import create_geo_data
 import json
 
-
+tree = []
 # Vote.objects.filter(election__election_type='district').distinct('political_party') and list all political parties
 
 # Vote.objects.filter(
@@ -31,16 +31,16 @@ def get_geography(request):
 
 # TODO: move body to tree.py and create new function
 def get_areas_tree(request):
-    tree = []
-    for el in Election.objects.filter().distinct('election_type'):
-        if not el.election_type in ['president_first_turn_districts', 'president_second_turn_districts']:
-            election = {
-                'name': coder_election_types[el.election_type],
-                'children': get_election_tree(el.election_type),
-                'url': 'stats/' + el.election_type + '/',
-                'type': el.election_type
-            }
-            tree.append(election)
+    if len(tree) == 0:
+        for el in Election.objects.filter().distinct('election_type'):
+            if not el.election_type in ['president_first_turn_districts', 'president_second_turn_districts']:
+                election = {
+                    'name': coder_election_types[el.election_type],
+                    'children': get_election_tree(el.election_type),
+                    'url': 'stats/' + el.election_type + '/',
+                    'type': el.election_type
+                }
+                tree.append(election)
 
     return JsonResponse(tree, safe=False)
 
