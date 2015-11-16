@@ -129,6 +129,9 @@ PROJECT_DIR = os.path.dirname(__file__)
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 CORS_ORIGIN_WHITELIST = (
-    '*'
+    # 'http://wyreczamypkw.miastojestnasze.org/',
+    # 'http://www.wyreczamypkw.miastojestnasze.org',
+    '^(https?://)?(\w+\.)?wyreczamypkw.miastojestnasze\.org$',
+    '^(http?://)?(\w+\.)?wyreczamypkw.miastojestnasze\.org$'
 )
 ALLOWED_HOSTS = ['*']
