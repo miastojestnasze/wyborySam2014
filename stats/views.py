@@ -12,6 +12,7 @@ from geography import create_geo_data
 import json
 
 tree = []
+cashed_stats = {}
 # Vote.objects.filter(election__election_type='district').distinct('political_party') and list all political parties
 
 # Vote.objects.filter(
@@ -47,13 +48,17 @@ def get_areas_tree(request):
 
 def get_stats(request, **kwargs):
     votes_kwargs = {}
+    keys = ['district', 'number_of_electoral_circuit', 'number_of_district']    
+
+    district_data = {'geography': create_geo_data(**kwargs), 'votes': []}
+    el_type = kwargs['election_type'];
     
+    if 1 == len(kwargs.keys()) and not kwargs.keys()[0] in keys and el_type in cashed_stats:
+        return JsonResponse(cashed_stats[el_type])
 
     for k, v in kwargs.iteritems():
         if k != 'political_party':
             votes_kwargs['election__' + k] = float(v) if 'number' in k else v
-
-    district_data = {'geography': create_geo_data(**kwargs), 'votes': []}
 
     for v in Vote.objects.filter(**votes_kwargs).distinct('political_party'):
         votes_kwargs['political_party'] = v.political_party
@@ -67,6 +72,9 @@ def get_stats(request, **kwargs):
 
     if kwargs['election_type'] in ['district', 'city_council', 'voivodeship']:
         district_data['candidates'] = get_candidates(**kwargs)
+
+    if 1 == len(kwargs.keys()) and not kwargs.keys()[0] in keys and not el_type in cashed_stats:
+        cashed_stats[el_type] = district_data
 
     return JsonResponse(district_data)
 
