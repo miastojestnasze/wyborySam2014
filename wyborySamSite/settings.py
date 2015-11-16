@@ -128,7 +128,7 @@ STATIC_URL = '/static/'
 PROJECT_DIR = os.path.dirname(__file__)
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
-CORS_ORIGIN_WHITELIST = (
+CORS_ORIGIN_REGEX_WHITELIST = (
     # 'http://wyreczamypkw.miastojestnasze.org/',
     # 'http://www.wyreczamypkw.miastojestnasze.org',
     '^(https?://)?(\w+\.)?wyreczamypkw\.miastojestnasze\.org$',
