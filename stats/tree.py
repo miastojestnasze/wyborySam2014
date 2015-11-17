@@ -41,6 +41,9 @@ def create_circle(tree, circuit, is_first_child=False):
             'children': []
         }
         children.append(new_circle)
+        if is_first_child == True:
+            districts = Election.objects.filter(election_type=circuit.election_type, number_of_district=circuit.number_of_district).distinct('district').values_list('district', flat=True)
+            new_circle['districts'] = ''.join([(x + ", ") for x in districts])[:-2]
         return children[len(children)-1]
     else:
         return children[idx_circle]
