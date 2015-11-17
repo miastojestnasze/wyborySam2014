@@ -131,7 +131,7 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 CORS_ORIGIN_REGEX_WHITELIST = (
     # '^(https?://)?(\w+\.)?wyreczamypkw\.miastojestnasze\.org$',
     # '^(http?://)?(\w+\.)?wyreczamypkw\.miastojestnasze\.org$',
-    '*'
+    '.+'
 )
 
 CORS_ALLOW_METHODS = ('GET')
